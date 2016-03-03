@@ -86,11 +86,13 @@ public class TimerJob {
 			timer.setLaststatus("成功");
 			timerService.update(timer);
 			
+			
 		} catch (Exception e) {
 			timer.setLastexcute(lastDate);
 			timer.setNextexcute(nextexcute);
 			timer.setLaststatus("失败");
 			timerService.update(timer);
+			
 		}
 
 	}

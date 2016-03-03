@@ -50,6 +50,7 @@ public class CaseServiceImpl implements CaseService{
 		return sd.queryAllCount();
 	}
 	
+	
 	public int getCaseCount(Case cases){
 		return sd.queryAllCount(cases);
 	}
