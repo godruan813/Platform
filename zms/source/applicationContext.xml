@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.0.151:3306/zms" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.format_sql">false</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>entity/Student.hbm.xml</value>
+				<value>entity/Case.hbm.xml</value>
+				<value>entity/STask.hbm.xml</value>
+				<value>entity/Module.hbm.xml</value>
+				<value>entity/PTask.hbm.xml</value>
+				<value>entity/Computer.hbm.xml</value>
+				<value>entity/AutoStep.hbm.xml</value>
+				<value>entity/User.hbm.xml</value>
+				<value>entity/Favo.hbm.xml</value>
+				<value>entity/Casestep.hbm.xml</value>
+				<value>entity/Timer.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="student_dao" class="daoImpl.StudentDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="student" class="action.StudentAction" scope="prototype">
+		<property name="ss">
+			<ref bean="student_service" />
+		</property>
+	</bean>
+	<bean id="user" class="action.UserAction" scope="prototype">
+		<property name="userService">
+			<ref bean="user_service" />
+		</property>
+		<property name="moduleService">
+			<ref bean="module_service" />
+		</property>
+	</bean>
+	<bean id="test" class="action.TestAction" scope="prototype" />
+	<bean id="json" class="action.TestJsonAction" scope="prototype" />
+	<bean id="student_service" class="serviceImpl.StudentServiceImpl"
+		scope="prototype">
+		<property name="sd">
+			<ref bean="student_dao" />
+		</property>
+	</bean>
+	
+	<bean id="case" class="action.CaseAction" scope="prototype" />
+	<bean id="case_service" class="serviceImpl.CaseServiceImpl" scope="prototype" />
+	<bean id="case_dao" class="daoImpl.CaseDAOImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="module" class="action.ModuleAction" scope="prototype" />
+	<bean id="module_service" class="serviceImpl.ModuleServiceImpl" scope="prototype" />
+	<bean id="module_dao" class="daoImpl.ModuleDAOImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="favo" class="action.FavoAction" scope="prototype" />
+	<bean id="favo_service" class="serviceImpl.FavoServiceImpl" scope="prototype" />
+	<bean id="favo_dao" class="daoImpl.FavoDAOImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="timer" class="action.TimerAction" scope="prototype" />
+	<bean id="timer_service" class="serviceImpl.TimerServiceImpl" scope="prototype" />
+	<bean id="timer_dao" class="daoImpl.TimerDAOImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="stask" class="action.TaskAction" scope="prototype" />
+	<bean id="stask_service" class="serviceImpl.STaskServiceImpl"
+		scope="prototype" />
+	<bean id="stask_dao" class="daoImpl.STaskDAOImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ptask_service" class="serviceImpl.PTaskServiceImpl"
+		scope="prototype" />
+	<bean id="ptask_dao" class="daoImpl.PTaskDAOImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+    <bean id="user_service" class="serviceImpl.UserServiceImpl"
+		scope="prototype" />
+	<bean id="user_dao" class="daoImpl.UserDAOImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="platform_dao" class="daoImpl.PlatFormDaoImpl" scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CaseProcessService" class="serviceImpl.CaseProcessServiceImpl" />
+	<bean id="httpClient" class="utils.HttpRequestProxy" />
+	<!-- **********************************定时任务测试******************************************** -->
+	<bean id="taskJob" class="timer.TimerJob" />
+	<bean id="jobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="group" value="job_work" />
+		<property name="name" value="job_work_name" />
+		<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false" />
+		<property name="targetObject">
+			<ref bean="taskJob" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+
+	<!-- 调度触发器 -->
+	<bean id="myTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="name" value="work_default_name" />
+		<property name="group" value="work_default" />
+		<property name="jobDetail">
+			<ref bean="jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/1 * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 调度工厂 -->
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="myTrigger" />
+			</list>
+		</property>
+	</bean>
+</beans>

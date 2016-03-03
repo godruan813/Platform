@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="default" extends="struts-default">
+		<interceptors>  
+            <interceptor name="loginInteceptor" class="filter.LoginInterceptor" />  
+            <interceptor-stack name="loginStack">  
+                   <interceptor-ref name="loginInteceptor">  
+                       <param name="excludeMethods">login,logout</param>  
+                   </interceptor-ref>  
+                   <interceptor-ref name="defaultStack"></interceptor-ref>  
+            </interceptor-stack>  
+		</interceptors>  
+		<default-interceptor-ref name="loginStack" />  
+	    <global-results>
+            <result name="login" type="redirect">/loginredirect.jsp</result>
+        </global-results>
+		<action name="login" class="student" method="studentLogin">
+			<result name="success" type="redirect">/main.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<action name="addStudent" class="student" method="studentAdd">
+			<result name="success" type="redirectAction">getAllStudentByCondition</result>
+		</action>
+		<action name="gotoModifyStudent" class="student" method="gotoStudentModify">
+			<result name="success" >/student_modify.jsp</result>
+		</action>
+		<action name="modifyStudent" class="student" method="studentModify">
+			<result name="success"  type="redirectAction" >getAllStudentByCondition</result>
+		</action>
+		<action name="deleteStudent" class="student" method="studentDelete">
+			<result name="success"  type="chain" >getAllStudentByCondition</result>
+		</action>
+		<action name="queryAllStudent" class="student" method="getAllStudent">
+			<result name="success" >/student_manage.jsp</result>
+		</action>
+		<action name="getAllStudentByCondition" class="student" method="getAllStudentByCondition">
+			<result name="success" >/student_manage.jsp</result>
+		</action>
+		<action name="getAllStudentByConditionP" class="student" method="getAllStudentByConditionP">
+			<result name="success" >/student_manage.jsp</result>
+		</action>
+		
+	    <action name="addUser" class="user" method="userAdd">
+			<result name="success" type="redirectAction">getAllUserByCondition</result>
+		</action>
+		<action name="gotoModifyUser" class="user" method="gotoUserModify">
+			<result name="success" >/user_modify.jsp</result>
+		</action>
+		<action name="modifyUser" class="user" method="userModify">
+			<result name="success"  type="redirectAction" >getAllUserByCondition</result>
+		</action>
+		<action name="deleteUser" class="user" method="userDelete">
+			<result name="success"  type="chain" >getAllUserByCondition</result>
+		</action>
+		<action name="queryAllUser" class="user" method="getAllUser">
+			<result name="success" >/user_manage.jsp</result>
+		</action>
+		<action name="getAllUserByCondition" class="user" method="getAllUserByCondition">
+			<result name="success" >/user_manage.jsp</result>
+		</action>
+		<action name="getAllUserByConditionP" class="user" method="getAllUserByConditionP">
+			<result name="success" >/user_manage.jsp</result>
+		</action>
+		<action name="getModule" class="module" method="getModules">
+			<result name="success">/module_modify.jsp</result>
+		</action>
+        <action name="addModule" class="module" method="moduleModify">
+			<result name="success" type="redirect">/module_ztree.jsp?module.id=${mId}</result>
+        </action>  
+	    <action name="logout" class="user" method="logout">
+			<result name="success" type="redirect">/login.jsp</result>
+		</action>
+	    <action name="log" class="user" method="login">
+			<result name="success" type="redirect">/#1/12</result>
+			<result name="input" type="redirect">/login.jsp</result>
+		</action>
+		<action name="getAllCaseByCondition" class="case" method="getAllCaseByCondition">
+			<result name="success" >/autocase_manage.jsp</result>
+		</action>
+		<action name="getAllCaseByConditionP" class="case" method="getAllCaseByConditionP">
+			<result name="success" >/autocase_manage.jsp</result>
+		</action>
+		<action name="getAllfCaseByCondition" class="case" method="getAllfCaseByCondition">
+			<result name="success" >/case_manage.jsp</result>
+		</action>
+		<action name="getAllfCaseByConditionP" class="case" method="getAllfCaseByConditionP">
+			<result name="success" >/case_manage.jsp</result>
+		</action>
+		<action name="getAllPTaskByCondition" class="stask" method="getAllPTaskByCondition">
+			<result name="success" >/task_manage.jsp</result>
+		</action>
+		<action name="getAllPTaskByConditionP" class="stask" method="getAllPTaskByConditionP">
+			<result name="success" >/task_manage.jsp</result>
+		</action>
+		<action name="getAllFavoByCondition" class="favo" method="getAllFavoByCondition">
+			<result name="success" >/favo_manage.jsp</result>
+		</action>
+		<action name="getAllFavoByConditionP" class="favo" method="getAllFavoByCondition">
+			<result name="success" >/favo_manage.jsp</result>
+		</action>
+		<action name="gotoModifyCase" class="case" method="gotoCaseModify">
+			<result name="success" >/case_modify.jsp</result>
+			<result name="input">/case_modify.jsp</result>
+		</action>
+		<action name="addCase" class="case" method="caseAdd">
+			<result name="success" type="redirect" >/case_ztree.jsp?module=${mId}</result>
+		</action>	
+		<action name="getAllTimerByCondition" class="timer" method="getAllTimerByCondition">
+			<result name="success" >/timer_manage.jsp</result>
+		</action>
+		<action name="getAllTimerByConditionP" class="timer" method="getAllTimerByConditionP">
+			<result name="success" >/timer_manage.jsp</result>
+		</action>	
+		<action name="gotoModifyTimer" class="timer" method="gotoTimerModify">
+			<result name="success" >/timer_modify.jsp</result>
+			<result name="input">/timer_modify.jsp</result>
+		</action>	
+		<!-- 
+		<action name="modifyCase" class="case" method="caseModify">
+			<result name="success" >/case_modify.jsp</result>
+		</action>
+		 -->		
+	</package>  
+	 
+	<package name="action" extends="json-default" >  
+        <action name="json" class="json" method="json">  
+            <result type="json">  
+                <param name="root">dataMap</param>  
+            </result>  
+        </action>  
+        <action name="deleteStudentJ" class="student" method="studentDeleteJ">  
+            <result type="json">  
+                <param name="root">dataMap</param>  
+            </result>  
+        </action>
+        <action name="deleteUserJ" class="user" method="userDeleteJ">  
+            <result type="json">  
+                <param name="root">dataMap</param>  
+            </result>  
+        </action>
+        <action name="getMenu" class="student" method="getMenu">  
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action>  
+        <action name="getZtree" class="user" method="getZtree">  
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action>    
+        <action name="addSTask" class="stask" method="addTask">  
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action>
+        <action name="delSTask" class="stask" method="delTask">  
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action>   
+        <action name="delAllSTask" class="stask" method="delAllTask">  
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action>
+        <action name="getTasks" class="stask" method="getTasks">  
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action> 
+        <action name="excute" class="stask" method="excute">  
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action> 
+        <action name="deleteModule" class="module" method="moduleDelete">
+            <result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+         </action> 
+        <action name="modifyModule" class="module" method="moduleModify">
+		<result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action> 
+        <action name="addFavo" class="favo" method="favoAdd">
+		<result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action>  
+        <action name="deleteFavo" class="favo" method="favoDelete">
+		<result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action>
+        <action name="getRunning" class="stask" method="getRunning">
+		<result type="json">  
+                <param name="root">dataJson</param>  
+            </result>  
+        </action> 
+        
+        <action name="deleteCaseJ" class="case" method="caseDeleteJ">  
+            <result type="json">  
+                <param name="root">dataMap</param>  
+            </result>  
+        </action>
+        <action name="deleteAllCaseJ" class="case" method="caseAllDeleteJ">  
+            <result type="json">  
+                <param name="root">dataMap</param>  
+            </result>  
+        </action>   
+        <action name="modifyCase" class="case" method="caseModify">
+			<result type="json">  
+                <param name="root">dataMap</param>  
+            </result> 
+		</action>	       
+        <action name="modifyTimer" class="timer" method="timerModify">
+			<result type="json">  
+                <param name="root">dataMap</param>  
+            </result> 
+		</action>			               
+    </package> 
+</struts>    

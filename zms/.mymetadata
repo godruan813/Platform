@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="zms"
+  id="myeclipse.1441530885653"
+  context-root="/zms"
+  j2ee-spec="5.0"
+  archive="zms.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

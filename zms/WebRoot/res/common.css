@@ -1,0 +1,233 @@
+@CHARSET "UTF-8";
+
+.window {
+	font-size: 12px;
+	position: absolute;
+	overflow: hidden;
+	background1: #878787;
+	padding: 5px;
+	border: 1px solid #99BBE8;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	background: rgba(239, 214, 214, 0) url('images/panel_title.png');
+}
+
+.window .window-body {
+	background: #fff;
+	border: 1px solid #99BBE8;
+	border-top-width: 0px;
+}
+
+.window .window-header {
+	background: transparent;
+	padding: 2px 0px 4px 0px;
+}
+
+.login {
+	display: block;
+	float: left;
+	padding: 5px;
+	text-align: right;
+	width: 79px;
+}
+
+.panel {
+	overflow: hidden;
+	font-size: 12px;
+}
+
+.panel-header {
+	padding: 5px;
+	line-height: 15px;
+	color: #15428b;
+	font-weight: bold;
+	font-size: 12px;
+	background: url('images/panel_title.png') repeat-x;
+	position: relative;
+	border: 1px solid #99BBE8;
+}
+
+.panel-body {
+	overflow: auto;
+	border: 1px solid #99BBE8;
+	border-top-width: 0px;
+}
+
+.panel-body-noborder {
+	border-width: 0px;
+}
+
+.panel-header-noborder {
+	border-width: 0px;
+	border-bottom: 1px solid #99BBE8;
+}
+
+.message {
+	margin: 5px 20px;
+	height: 10px;
+	text-align: center;
+}
+
+html {
+	overflow-x: hidden;
+}
+
+body {
+	margin: 0px;
+	font-family: Microsoft YaHei;
+	overflow-x: hidden;
+}
+
+#bg {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1001;
+	-moz-opacity: 0.7;
+	opacity: .70;
+	filter: alpha(opacity =       70);
+}
+
+#show {
+	display: none;
+	position: absolute;
+	top: 17%;
+	left: 18%;
+	width: 58%;
+	height: 65%;
+	padding: 3px;
+	border: 8px solid #E8E9F7;
+	background-color: white;
+	z-index: 1002;
+	overflow: auto;
+}
+
+#toolbar {
+	display: none;
+	position: absolute;
+	top: 11%;
+	left: 18%;
+	width: 58%;
+	height: 7%;
+	padding: 3px;
+	border-top: 4px solid #E8E9F7;
+	border-left: 8px solid #E8E9F7;
+	border-right: 8px solid #E8E9F7;
+	border-bottom: 8px solid white;
+	background-color: white;
+	z-index: 1002
+}
+
+#shut:hover {
+	background: url(sh.png) no-repeat 0px -25px;
+}
+
+#shut {
+	display: block;
+	width: 45px;
+	height: 18px;
+	float: right;
+	margin-right: 0px;
+	background: url(sh.png) no-repeat 0px 0px;
+	cursor: pointer;
+	*margin-top: -18px;
+}
+
+a {
+	text-decoration: none;
+	cursor: hand
+}
+
+a:hover,a:focus {
+	text-decoration: none;
+}
+
+.table-striped tr th {
+	width: 20%
+}
+
+#swipe {
+	background: white;
+	width: 400px;
+	height: 300px;
+	position: absolute;
+	bottom: 23px;
+	right: -410px;
+	border-top: 10px solid peachpuff;
+	border-left: 10px solid peachpuff;
+	overflow: hidden;
+	cursor: pointer
+}
+
+#notice {
+	width: 95%;
+	height: 80%;
+	padding: 20px 5px 5px 5px;
+	font-size: 13px;
+	overflow: auto
+}
+
+#close {
+	display: block;
+	width: 45px;
+	height: 18px;
+	float: right;
+	margin-right: 0px;
+	background: url(sh.png) no-repeat 0px 0px;
+	margin-top: -5px
+}
+
+#close:hover {
+	background: url(sh.png) no-repeat 0px -25px;
+}
+
+.chd {
+	border-bottom: 1px dashed black;
+	margin-bottom: 10px;
+	padding-bottom: 10px; cursor; pointer;
+	color: black;
+}
+
+.titlebar{
+	
+    background: #f8fafe;
+    border-bottom: 1px solid #e5e5e5;
+    min-height: 46px;
+    min-height: 20px\0;
+    padding: 13px 20px;
+    vertical-align: bottom;
+    position: relative	
+	
+}
+
+#btns input{
+	
+	font-size:9px;
+	padding:3px 8px;
+}
+
+tr.center th{
+	text-align:center;
+	
+}
+
+textarea{
+	resize:none;
+}
+
+#ct tr td{
+	vertical-align:middle;
+}
+
+.btn-add{
+	color:green;	
+}
+
+.btn-delete{
+	color:red;		
+}
+}
